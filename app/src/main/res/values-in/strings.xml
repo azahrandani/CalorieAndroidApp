@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Calorie</string>
+    <string name="bmr_calculator">Kalkulator BMR</string>
+    <string name="form_gender">Jenis Kelamin :</string>
+    <string name="form_male">Pria</string>
+    <string name="form_female">Wanita</string>
+    <string name="form_age">Usia :</string>
+    <string name="years_old">tahun</string>
+    <string name="form_height">Tinggi Badan :</string>
+    <string name="cm">cm</string>
+    <string name="form_weight">Berat Badan :</string>
+    <string name="kg">kg</string>
+    <string name="calculate">Hitung</string>
+    <string name="change_language">Ganti Bahasa</string>
+
+    <string name="success_save_title">Menu Tersimpan!</string>
+</resources>

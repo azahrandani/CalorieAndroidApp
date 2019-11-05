@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="bmrBlue">#0074B7</color>
+    <color name="bmrGreen">#92DDC9</color>
+    <color name="bmrYellow">#FFFA70</color>
+    <color name="bmrDarkBlue">#003C5F</color>
+    <color name="bmrGrey">#252525</color>
+
+</resources>

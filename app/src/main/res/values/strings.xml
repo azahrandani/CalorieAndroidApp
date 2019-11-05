@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Calorie</string>
+    <string name="bmr_calculator">BMR Calculator</string>
+    <string name="form_gender">Gender :</string>
+    <string name="form_male">Male</string>
+    <string name="form_female">Female</string>
+    <string name="form_age">Age :</string>
+    <string name="years_old">years old</string>
+    <string name="form_height">Height :</string>
+    <string name="cm">cm</string>
+    <string name="form_weight">Weight :</string>
+    <string name="kg">kg</string>
+    <string name="calculate">Calculate</string>
+    <string name="change_language">Change Language</string>
+    
+    <string name="success_save_title">Menu Saved!</string>
+</resources>

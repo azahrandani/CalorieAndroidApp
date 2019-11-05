@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_spork_mobile_landscape"/>
+
+    <TextView
+        android:id="@+id/titleBMRCalculator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BMR Calculator"
+        android:textColor="@color/bmrBlue"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/left_input_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/titleBMRCalculator"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:id="@+id/gender_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender :"
+                android:textSize="20dp"
+                android:textColor="@color/bmrGreen"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:textColor="@color/bmrGreen"/>
+
+                <RadioButton
+                    android:id="@+id/radioFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:textColor="@color/bmrGreen"/>
+
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/age_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/gender_radio_group"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="Age :"
+                android:textSize="20dp"
+                android:textColor="@color/bmrGreen"/>
+            
+            <EditText
+                android:id="@+id/age_input"
+                android:layout_width="145dp"
+                android:layout_height="53dp"
+                android:hint="years old"
+                android:inputType="number"
+                android:textColor="@color/bmrGreen"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/height_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/age_linear_layout"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="Height :"
+                android:textSize="20dp"
+                android:textColor="@color/bmrGreen"/>
+
+            <EditText
+                android:id="@+id/height_input"
+                android:layout_width="145dp"
+                android:layout_height="53dp"
+                android:hint="cm"
+                android:inputType="number"
+                android:textColor="@color/bmrGreen"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/weight_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/height_linear_layout"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="Weight :"
+                android:textSize="20dp"
+                android:textColor="@color/bmrGreen"/>
+
+            <EditText
+                android:id="@+id/weight_input"
+                android:layout_width="145dp"
+                android:layout_height="53dp"
+                android:hint="kg"
+                android:inputType="number"
+                android:textColor="@color/bmrGreen"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/left_input_layout"
+        app:layout_constraintTop_toBottomOf="@id/titleBMRCalculator"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="90dp">
+
+        <Button
+            android:id="@+id/calculateButton"
+            android:layout_width="170dp"
+            android:layout_height="70dp"
+            android:background="@color/bmrGreen"
+            android:text="Calculate"
+            android:textSize="22dp"
+            android:textColor="#000"/>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
