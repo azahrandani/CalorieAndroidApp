@@ -1,37 +1,53 @@
 package com.lab.calorie;
 
-import com.google.gson.annotations.SerializedName;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
-import java.util.List;
 
+@Entity(tableName = "food_table")
 public class Food implements Serializable {
 
-    @SerializedName("name")
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    private int id;
+
+    @NonNull
+    @ColumnInfo(name = "name")
     private String name;
 
-    @SerializedName("nutrients")
-    private List<FoodNutrient> foodNutrientList;
+    @ColumnInfo(name = "kcal")
+    private int kcal;
 
-    public Food(String name, List<FoodNutrient> foodNutrientList) {
+    public Food(String name, int kcal) {
         this.name = name;
-        this.foodNutrientList = foodNutrientList;
+        this.kcal = kcal;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public List<FoodNutrient> getfoodNutrientList() {
-        return foodNutrientList;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setfoodNutrientList(List<FoodNutrient> foodNutrientList) {
-        this.foodNutrientList = foodNutrientList;
+    public int getKcal() {
+        return kcal;
     }
 
+    public void setKcal(int kcal) {
+        this.kcal = kcal;
+    }
 }

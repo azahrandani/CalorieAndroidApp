@@ -1,6 +1,7 @@
 package com.lab.calorie;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -13,18 +14,24 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private FoodViewModel mFoodViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent foodApiIntent = new Intent(this, FoodApiService.class);
-        startService(foodApiIntent);
+        mFoodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
 
         Button calculateButton = findViewById(R.id.calculateButton);
         calculateButton.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        callFoodApi();
     }
 
     private String[] getInputData() {
@@ -80,5 +89,31 @@ public class MainActivity extends AppCompatActivity {
         Intent refresh = new Intent(this, MainActivity.class);
         finish();
         startActivity(refresh);
+    }
+
+    public void callFoodApi() {
+        System.out.println("calling food api...");
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        Call<CompleteFoodJson> call = service.getFoodJson();
+        call.enqueue(new Callback<CompleteFoodJson>() {
+            @Override
+            public void onResponse(Call<CompleteFoodJson> call, Response<CompleteFoodJson> response) {
+                List<FoodJson> foodJsonList = response.body().getFoodReport().getFoodJsonList();
+                insertAllFood(foodJsonList);
+                System.out.println("finish calling food api!");
+            }
+
+            @Override
+            public void onFailure(Call<CompleteFoodJson> call, Throwable t) {
+                System.out.println("pokonya fail aja " + t.getMessage());
+            }
+        });
+    }
+
+    public void insertAllFood(List<FoodJson> foodJsonList) {
+        for (FoodJson food : foodJsonList) {
+            Food newFood = new Food(food.getName(), food.getfoodNutrientList().get(0).getValue());
+            mFoodViewModel.insert(newFood);
+        }
     }
 }

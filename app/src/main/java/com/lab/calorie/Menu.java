@@ -5,12 +5,9 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity(tableName = "menu_table")
 public class Menu {
-
-    private List<Food> foodList;
 
     @PrimaryKey
     @ColumnInfo(name = "date")
@@ -21,14 +18,6 @@ public class Menu {
 
     @ColumnInfo(name = "bmrValue")
     private int bmrValue;
-
-    public List<Food> getFoodList() {
-        return foodList;
-    }
-
-    public void setFoodList(List<Food> foodList) {
-        this.foodList = foodList;
-    }
 
     public Date getDate() {
         return date;

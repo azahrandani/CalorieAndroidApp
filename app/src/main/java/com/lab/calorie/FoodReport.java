@@ -25,16 +25,16 @@ public class FoodReport {
     private int total;
 
     @SerializedName("foods")
-    private List<Food> foodList;
+    private List<FoodJson> foodJsonList;
 
-    public FoodReport(String sr, String groups, String subset, int end, int start, int total, List<Food> foodList) {
+    public FoodReport(String sr, String groups, String subset, int end, int start, int total, List<FoodJson> foodJsonList) {
         this.sr = sr;
         this.groups = groups;
         this.subset = subset;
         this.end = end;
         this.start = start;
         this.total = total;
-        this.foodList = foodList;
+        this.foodJsonList = foodJsonList;
     }
 
     public String getSr() {
@@ -61,8 +61,8 @@ public class FoodReport {
         return total;
     }
 
-    public List<Food> getFoodList() {
-        return foodList;
+    public List<FoodJson> getFoodJsonList() {
+        return foodJsonList;
     }
 
     public void setSr(String sr) {
@@ -89,7 +89,7 @@ public class FoodReport {
         this.total = total;
     }
 
-    public void setFoodList(List<Food> foodList) {
-        this.foodList = foodList;
+    public void setFoodJsonList(List<FoodJson> foodJsonList) {
+        this.foodJsonList = foodJsonList;
     }
 }

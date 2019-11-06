@@ -14,7 +14,7 @@ import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>{
 
-    private List<Food> dataList;
+    private List<Food> foodList;
     private Context context;
     private int[] selectedItems;
     private int totalCalorie = 0;
@@ -23,13 +23,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     private TextView totalCalorieTextView;
     private TextView moreCalorieTextView;
 
-    public CustomAdapter(Context context,List<Food> dataList, TextView totalCalorieTextView, TextView moreCalorieTextView, int bmrValue){
+    public CustomAdapter(Context context, TextView totalCalorieTextView, TextView moreCalorieTextView, int bmrValue){
         this.context = context;
-        this.dataList = dataList;
-        this.selectedItems = new int[dataList.size()];
-        for (int i = 0; i < dataList.size(); i++) {
-            selectedItems[i] = 0;
-        }
+//        this.foodList = foodList;
+//        this.selectedItems = new int[foodList.size()];
+//        for (int i = 0; i < foodList.size(); i++) {
+//            selectedItems[i] = 0;
+//        }
         this.totalCalorieTextView = totalCalorieTextView;
         this.moreCalorieTextView = moreCalorieTextView;
         this.bmrValue = bmrValue;
@@ -66,8 +66,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         int greyColor = holder.mView.getResources().getColor(R.color.bmrGrey);
         int darkBlueColor = holder.mView.getResources().getColor(R.color.bmrDarkBlue);
 
-        String foodName = dataList.get(position).getName();
-        String foodNutrient = Integer.toString(dataList.get(position).getfoodNutrientList().get(0).getValue());
+        String foodName = foodList.get(position).getName();
+        String foodNutrient = Integer.toString(foodList.get(position).getKcal());
 
         holder.txtName.setText(foodName);
         holder.txtKcal.setText(foodNutrient);
@@ -81,9 +81,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
                 selectedItems[position] = selectedItems[position] == 1 ? 0 : 1;
 
                 if (selectedItems[position] == 1) {
-                    totalCalorie += dataList.get(position).getfoodNutrientList().get(0).getValue();
+                    totalCalorie += foodList.get(position).getKcal();
                 } else {
-                    totalCalorie -= dataList.get(position).getfoodNutrientList().get(0).getValue();
+                    totalCalorie -= foodList.get(position).getKcal();
                 }
 
                 notifyDataSetChanged();
@@ -97,16 +97,30 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         }
     }
 
+    void setAllFood(List<Food> foodList){
+        this.foodList = foodList;
+        this.selectedItems = new int[foodList.size()];
+        for (int i = 0; i < foodList.size(); i++) {
+            selectedItems[i] = 0;
+        }
+        System.out.println("size dari foodList di setAllFood adalah " + foodList.size());
+        notifyDataSetChanged();
+    }
+
+
     @Override
     public int getItemCount() {
-        return dataList.size();
+        if (foodList != null) {
+            return foodList.size();
+        }
+        return 0;
     }
 
     public List<Food> getSelectedFood() {
         List<Food> selectedFood = new ArrayList<>();
         for (int i = 0; i < selectedItems.length; i++) {
             if (selectedItems[i] == 1) {
-                selectedFood.add(dataList.get(i));
+                selectedFood.add(foodList.get(i));
             }
         }
         return selectedFood;

@@ -50,7 +50,7 @@ public class SelectedFoodAdapter extends RecyclerView.Adapter<SelectedFoodAdapte
         int greyColor = holder.mView.getResources().getColor(R.color.bmrGrey);
 
         String foodName = foodList.get(position).getName();
-        String foodNutrient = Integer.toString(foodList.get(position).getfoodNutrientList().get(0).getValue());
+        String foodNutrient = Integer.toString(foodList.get(position).getKcal());
 
         holder.txtName.setText(foodName);
         holder.txtKcal.setText(foodNutrient);

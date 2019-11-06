@@ -7,14 +7,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class PickMenuActivity extends AppCompatActivity {
     private CustomAdapter adapter;
@@ -23,6 +21,8 @@ public class PickMenuActivity extends AppCompatActivity {
     private TextView moreCalorieTextView;
 
     private int bmrValue;
+
+    private FoodViewModel mFoodViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +35,36 @@ public class PickMenuActivity extends AppCompatActivity {
         totalCalorieTextView = findViewById(R.id.total_calorie);
         moreCalorieTextView = findViewById(R.id.more_calorie);
 
-        /*Create handle for the RetrofitInstance interface*/
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<FoodJson> call = service.getFoodJson();
-        call.enqueue(new Callback<FoodJson>() {
-            @Override
-            public void onResponse(Call<FoodJson> call, Response<FoodJson> response) {
-                List<Food> foodList = response.body().getFoodReport().getFoodList();
-                generateDataList(foodList);
-            }
+        mFoodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
+        adapter = new CustomAdapter(this, totalCalorieTextView, moreCalorieTextView, bmrValue);
 
+        recyclerView = findViewById(R.id.customRecyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PickMenuActivity.this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+
+        System.out.println("this is somewhere in pick menu activity");
+        /*Create handle for the RetrofitInstance interface*/
+//        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+//        Call<CompleteFoodJson> call = service.getFoodJson();
+//        call.enqueue(new Callback<CompleteFoodJson>() {
+//            @Override
+//            public void onResponse(Call<CompleteFoodJson> call, Response<CompleteFoodJson> response) {
+//                List<FoodJson> foodJsonList = response.body().getFoodReport().getFoodJsonList();
+//                generateDataList(foodJsonList);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<CompleteFoodJson> call, Throwable t) {
+//                System.out.println("pokonya fail aja " + t.getMessage());
+//            }
+//        });
+
+        mFoodViewModel.getAllFood().observe(this, new Observer<List<Food>>() {
             @Override
-            public void onFailure(Call<FoodJson> call, Throwable t) {
-                System.out.println("pokonya fail aja " + t.getMessage());
+            public void onChanged(List<Food> foodList) {
+                System.out.println("masuk ke onchanged di pick menu activity");
+                adapter.setAllFood(foodList);
             }
         });
 
@@ -71,12 +88,12 @@ public class PickMenuActivity extends AppCompatActivity {
     }
 
     /*Method to generate List of data using RecyclerView with custom adapter*/
-    private void generateDataList(List<Food> foodList) {
-        recyclerView = findViewById(R.id.customRecyclerView);
-        adapter = new CustomAdapter(this, foodList, totalCalorieTextView, moreCalorieTextView, bmrValue);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PickMenuActivity.this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-    }
+//    private void generateDataList(List<FoodJson> foodJsonList) {
+//        recyclerView = findViewById(R.id.customRecyclerView);
+//        adapter = new CustomAdapter(this, totalCalorieTextView, moreCalorieTextView, bmrValue);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PickMenuActivity.this);
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setAdapter(adapter);
+//    }
 
 }

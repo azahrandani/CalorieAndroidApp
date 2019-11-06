@@ -4,12 +4,12 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class FoodNutrient implements Serializable {
+public class FoodNutrientJson implements Serializable {
 
     @SerializedName("value")
     private int value;
 
-    public FoodNutrient(int value) {
+    public FoodNutrientJson(int value) {
         this.value = value;
     }
 

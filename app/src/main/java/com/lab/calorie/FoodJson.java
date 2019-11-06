@@ -2,20 +2,36 @@ package com.lab.calorie;
 
 import com.google.gson.annotations.SerializedName;
 
-public class FoodJson {
+import java.io.Serializable;
+import java.util.List;
 
-    @SerializedName("report")
-    private FoodReport foodReport;
+public class FoodJson implements Serializable {
 
-    public FoodJson(FoodReport foodReport) {
-        this.foodReport = foodReport;
+    @SerializedName("name")
+    private String name;
+
+    @SerializedName("nutrients")
+    private List<FoodNutrientJson> foodNutrientJsonList;
+
+    public FoodJson(String name, List<FoodNutrientJson> foodNutrientJsonList) {
+        this.name = name;
+        this.foodNutrientJsonList = foodNutrientJsonList;
     }
 
-    public FoodReport getFoodReport() {
-        return foodReport;
+    public String getName() {
+        return name;
     }
 
-    public void setFoodReport(FoodReport foodReport) {
-        this.foodReport = foodReport;
+    public List<FoodNutrientJson> getfoodNutrientList() {
+        return foodNutrientJsonList;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setfoodNutrientList(List<FoodNutrientJson> foodNutrientJsonList) {
+        this.foodNutrientJsonList = foodNutrientJsonList;
+    }
+
 }
