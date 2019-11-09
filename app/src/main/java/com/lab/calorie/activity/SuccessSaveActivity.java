@@ -192,6 +192,7 @@ public class SuccessSaveActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable("menu", menu);
         notificationIntent.putExtra("menu", bundle);
+        notificationIntent.putExtra("food_list", foodListBundle);
 
         PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 

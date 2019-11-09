@@ -12,7 +12,11 @@ import android.os.Bundle;
 
 import com.lab.calorie.R;
 import com.lab.calorie.activity.ListMenuActivity;
+import com.lab.calorie.model.Food;
 import com.lab.calorie.model.Menu;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 
@@ -25,6 +29,13 @@ public class NotificationPublisher extends BroadcastReceiver {
         Bundle menuBundle = intent.getBundleExtra("menu");
         Menu menu = (Menu) menuBundle.getSerializable("menu");
 
+        Bundle foodListBundle = intent.getBundleExtra("food_list");
+        List<Food> selectedFoodList = new ArrayList<>();
+
+        for (String key : foodListBundle.keySet()) {
+            selectedFoodList.add((Food) foodListBundle.getSerializable(key));
+        }
+
         Intent targetIntent = new Intent(context, ListMenuActivity.class);
         targetIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         targetIntent.putExtra("menu", menuBundle);
@@ -33,8 +44,8 @@ public class NotificationPublisher extends BroadcastReceiver {
 
         Notification.Builder builder = new Notification.Builder(context);
 
-        Notification notification = builder.setContentTitle("Calorie")
-                .setContentText("Click here to see what to eat for today!")
+        Notification notification = builder.setContentTitle("Calorie: Your food for today")
+                .setContentText(generateStringFoodList(selectedFoodList))
                 .setTicker("Food Alert!")
                 .setSmallIcon(R.drawable.icon_calorie)
                 .setContentIntent(pendingIntent).build();
@@ -55,5 +66,13 @@ public class NotificationPublisher extends BroadcastReceiver {
         }
 
         notificationManager.notify(0, notification);
+    }
+
+    private String generateStringFoodList(List<Food> selectedFoodList) {
+        String result = "";
+        for (Food food : selectedFoodList) {
+            result += food.getName() + "\n";
+        }
+        return result;
     }
 }
