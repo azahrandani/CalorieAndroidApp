@@ -16,28 +16,28 @@
         android:supportsRtl="true"
         android:theme="@style/BmrTheme">
 
-        <receiver android:name=".NotificationPublisher"/>
+        <receiver android:name=".broadcastReceiver.NotificationPublisher"/>
 
         <activity
-            android:name=".ListMenuActivity"
+            android:name=".activity.ListMenuActivity"
             android:label="@string/title_activity_list_menu"
             android:theme="@style/BmrTheme.NoActionBar"></activity>
         <activity
-            android:name=".SuccessSaveActivity"
+            android:name=".activity.SuccessSaveActivity"
             android:theme="@style/BmrTheme.NoActionBar" />
         <activity
-            android:name=".PickDateActivity"
+            android:name=".activity.PickDateActivity"
             android:theme="@style/BmrTheme.NoActionBar" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BmrResultActivity" />
-        <activity android:name=".PickMenuActivity" />
+        <activity android:name=".activity.BmrResultActivity" />
+        <activity android:name=".activity.PickMenuActivity" />
     </application>
 
 </manifest>

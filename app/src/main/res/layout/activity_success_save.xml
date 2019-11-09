@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".SuccessSaveActivity">
+    tools:context=".activity.SuccessSaveActivity">
 
     <data>
         <variable
             name="menu"
-            type="com.lab.calorie.Menu" />
+            type="com.lab.calorie.model.Menu" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/bmrDataFragment"
-        android:name="com.lab.calorie.BmrDataFragment"
+        android:name="com.lab.calorie.fragment.BmrDataFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/bmrValueFragment"
-        android:name="com.lab.calorie.BmrValueFragment"
+        android:name="com.lab.calorie.fragment.BmrValueFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="75dp"
@@ -40,7 +40,7 @@
 
     <fragment
         android:id="@+id/proceedToMenuFragment"
-        android:name="com.lab.calorie.ProceedToMenuFragment"
+        android:name="com.lab.calorie.fragment.ProceedToMenuFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="75dp"

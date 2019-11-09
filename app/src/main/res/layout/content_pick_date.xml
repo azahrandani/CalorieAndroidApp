@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".PickDateActivity"
+    tools:context=".activity.PickDateActivity"
     tools:showIn="@layout/activity_pick_date">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
