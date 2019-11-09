@@ -25,11 +25,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     public CustomAdapter(Context context, TextView totalCalorieTextView, TextView moreCalorieTextView, int bmrValue){
         this.context = context;
-//        this.foodList = foodList;
-//        this.selectedItems = new int[foodList.size()];
-//        for (int i = 0; i < foodList.size(); i++) {
-//            selectedItems[i] = 0;
-//        }
         this.totalCalorieTextView = totalCalorieTextView;
         this.moreCalorieTextView = moreCalorieTextView;
         this.bmrValue = bmrValue;
@@ -107,7 +102,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         notifyDataSetChanged();
     }
 
-
     @Override
     public int getItemCount() {
         if (foodList != null) {
@@ -124,6 +118,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             }
         }
         return selectedFood;
+    }
+
+    public int getTotalCalorie() {
+        return this.totalCalorie;
     }
 
 }

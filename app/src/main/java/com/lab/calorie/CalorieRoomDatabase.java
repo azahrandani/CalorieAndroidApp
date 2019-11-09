@@ -9,19 +9,22 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Bmr.class}, version = 1, exportSchema = false)
-public abstract class BmrRoomDatabase extends RoomDatabase {
+@Database(entities = {Bmr.class, Food.class, Menu.class, FoodMenuJoin.class}, version = 1, exportSchema = false)
+public abstract class CalorieRoomDatabase extends RoomDatabase {
 
     public abstract BmrDao bmrDao();
+    public abstract FoodDao foodDao();
+    public abstract MenuDao menuDao();
+    public abstract FoodMenuJoinDao foodMenuJoinDao();
 
-    private static volatile BmrRoomDatabase INSTANCE;
+    private static volatile CalorieRoomDatabase INSTANCE;
 
-    static BmrRoomDatabase getDatabase(final Context context) {
+    static CalorieRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (BmrRoomDatabase.class) {
+            synchronized (CalorieRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                BmrRoomDatabase.class, "bmr_database")
+                                CalorieRoomDatabase.class, "calorie_database")
                                 .addCallback(sRoomDatabaseCallback)
                                 .build();
                 }
@@ -42,10 +45,16 @@ public abstract class BmrRoomDatabase extends RoomDatabase {
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
-        private final BmrDao mDao;
+        private final BmrDao mBmrDao;
+        private final FoodDao mFoodDao;
+        private final MenuDao mMenuDao;
+        private final FoodMenuJoinDao mFoodMenuJoinDao;
 
-        PopulateDbAsync(BmrRoomDatabase db) {
-            mDao = db.bmrDao();
+        PopulateDbAsync(CalorieRoomDatabase db) {
+            mBmrDao = db.bmrDao();
+            mFoodDao = db.foodDao();
+            mMenuDao = db.menuDao();
+            mFoodMenuJoinDao = db.foodMenuJoinDao();
         }
 
         @Override

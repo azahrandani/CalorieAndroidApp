@@ -13,13 +13,17 @@ public class MenuRepository {
     private LiveData<List<Menu>> mAllMenu;
 
     public MenuRepository(Application application) {
-        MenuRoomDatabase db = MenuRoomDatabase.getDatabase(application);
+        CalorieRoomDatabase db = CalorieRoomDatabase.getDatabase(application);
         mMenuDao = db.menuDao();
         mAllMenu = mMenuDao.getAllMenu();
     }
 
     public LiveData<List<Menu>> getAllMenu() {
         return mAllMenu;
+    }
+
+    public LiveData<Menu> getMenuById(int id) {
+        return mMenuDao.getMenuById(id);
     }
 
     public void insert(Menu menu) {

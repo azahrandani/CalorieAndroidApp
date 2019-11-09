@@ -1,34 +1,37 @@
 package com.lab.calorie;
 
-import android.view.Menu;
-
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
-import java.util.Date;
+import static androidx.room.ForeignKey.CASCADE;
 
-@Entity(tableName = "food_menu_join",
-        primaryKeys = {"foodId", "menuDate"},
+@Entity(tableName = "food_menu_join_table",
+        primaryKeys = {"foodId", "menuId"},
         foreignKeys = {
                     @ForeignKey(entity = Food.class,
                                 parentColumns = "id",
-                                childColumns = "foodId"),
+                                childColumns = "foodId",
+                                onDelete = CASCADE),
                     @ForeignKey(entity = Menu.class,
-                                parentColumns = "date",
-                                childColumns = "menuDate")
+                                parentColumns = "id",
+                                childColumns = "menuId",
+                                onDelete = CASCADE)
                     })
 public class FoodMenuJoin {
 
+    @NonNull
     @ColumnInfo(name = "foodId")
     private int foodId;
 
-    @ColumnInfo(name = "menuDate")
-    private Date date;
+    @NonNull
+    @ColumnInfo(name = "menuId")
+    private int menuId;
 
-    public FoodMenuJoin(int foodId, Date date) {
+    public FoodMenuJoin(int foodId, int menuId) {
         this.foodId = foodId;
-        this.date = date;
+        this.menuId = menuId;
     }
 
     public int getFoodId() {
@@ -39,11 +42,11 @@ public class FoodMenuJoin {
         this.foodId = foodId;
     }
 
-    public Date getDate() {
-        return date;
+    public int getMenuId() {
+        return menuId;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setMenuId(int menuId) {
+        this.menuId = menuId;
     }
 }

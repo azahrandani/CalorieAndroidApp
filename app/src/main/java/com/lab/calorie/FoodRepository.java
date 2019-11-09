@@ -13,7 +13,7 @@ public class FoodRepository {
     private LiveData<List<Food>> mAllFood;
 
     public FoodRepository(Application application) {
-        FoodRoomDatabase db = FoodRoomDatabase.getDatabase(application);
+        CalorieRoomDatabase db = CalorieRoomDatabase.getDatabase(application);
         mFoodDao = db.foodDao();
         mAllFood = mFoodDao.getAllFood();
     }

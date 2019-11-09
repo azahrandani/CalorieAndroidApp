@@ -12,6 +12,11 @@
     <string name="kg">kg</string>
     <string name="calculate">Calculate</string>
     <string name="change_language">Change Language</string>
-    
+
     <string name="success_save_title">Menu Saved!</string>
+    <string name="for_text_view">for</string>
+    <string name="button_see_all_menus">See all menus</string>
+    <string name="button_make_another_menu">Make another menu</string>
+    <string name="title_activity_list_menu">List of Menus</string>
+    <string name="title_activity_detail_menu">Your menu for</string>
 </resources>

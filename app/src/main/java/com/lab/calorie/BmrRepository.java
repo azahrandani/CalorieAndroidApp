@@ -11,7 +11,7 @@ public class BmrRepository {
     private LiveData<Bmr> mTheBmr;
 
     public BmrRepository(Application application) {
-        BmrRoomDatabase db = BmrRoomDatabase.getDatabase(application);
+        CalorieRoomDatabase db = CalorieRoomDatabase.getDatabase(application);
         mBmrDao = db.bmrDao();
         mTheBmr = mBmrDao.getBMr();
     }

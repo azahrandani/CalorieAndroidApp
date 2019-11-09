@@ -15,4 +15,9 @@
     <string name="change_language">Ganti Bahasa</string>
 
     <string name="success_save_title">Menu Tersimpan!</string>
+    <string name="for_text_view">untuk</string>
+    <string name="button_see_all_menus">Lihat semua menu</string>
+    <string name="button_make_another_menu">Bikin menu lain</string>
+    <string name="title_activity_list_menu">Daftar Menu</string>
+    <string name="title_activity_detail_menu">Menu kamu untuk</string>
 </resources>

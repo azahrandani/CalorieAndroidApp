@@ -22,6 +22,10 @@ public class MenuViewModel extends AndroidViewModel {
         return mAllMenu;
     }
 
+    public LiveData<Menu> getMenuById(int id) {
+        return mRepository.getMenuById(id);
+    }
+
     public void insert(Menu menu) {
         mRepository.insert(menu);
     }

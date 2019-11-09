@@ -21,6 +21,7 @@ public class PickMenuActivity extends AppCompatActivity {
     private TextView moreCalorieTextView;
 
     private int bmrValue;
+    private int totalCalorie;
 
     private FoodViewModel mFoodViewModel;
 
@@ -43,23 +44,6 @@ public class PickMenuActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        System.out.println("this is somewhere in pick menu activity");
-        /*Create handle for the RetrofitInstance interface*/
-//        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-//        Call<CompleteFoodJson> call = service.getFoodJson();
-//        call.enqueue(new Callback<CompleteFoodJson>() {
-//            @Override
-//            public void onResponse(Call<CompleteFoodJson> call, Response<CompleteFoodJson> response) {
-//                List<FoodJson> foodJsonList = response.body().getFoodReport().getFoodJsonList();
-//                generateDataList(foodJsonList);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<CompleteFoodJson> call, Throwable t) {
-//                System.out.println("pokonya fail aja " + t.getMessage());
-//            }
-//        });
-
         mFoodViewModel.getAllFood().observe(this, new Observer<List<Food>>() {
             @Override
             public void onChanged(List<Food> foodList) {
@@ -79,21 +63,16 @@ public class PickMenuActivity extends AppCompatActivity {
                     System.out.println(selectedFood.get(i).getName());
                     bundle.putSerializable("food_no_"+i, selectedFood.get(i));
                 }
+
+                totalCalorie = adapter.getTotalCalorie();
+
                 Intent pickDateIntent = new Intent(PickMenuActivity.this, PickDateActivity.class);
                 pickDateIntent.putExtra("food_list", bundle);
                 pickDateIntent.putExtra("bmr_value", bmrValue);
+                pickDateIntent.putExtra("total_calorie", totalCalorie);
                 startActivity(pickDateIntent);
             }
         });
     }
-
-    /*Method to generate List of data using RecyclerView with custom adapter*/
-//    private void generateDataList(List<FoodJson> foodJsonList) {
-//        recyclerView = findViewById(R.id.customRecyclerView);
-//        adapter = new CustomAdapter(this, totalCalorieTextView, moreCalorieTextView, bmrValue);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PickMenuActivity.this);
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setAdapter(adapter);
-//    }
 
 }

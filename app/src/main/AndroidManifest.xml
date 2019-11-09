@@ -3,6 +3,8 @@
     package="com.lab.calorie">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
 
     <application
         android:allowBackup="true"
@@ -12,9 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/BmrTheme">
         <activity
+            android:name=".ListMenuActivity"
+            android:label="@string/title_activity_list_menu"
+            android:theme="@style/BmrTheme.NoActionBar"></activity>
+        <activity
             android:name=".SuccessSaveActivity"
             android:theme="@style/BmrTheme.NoActionBar" />
-
         <activity
             android:name=".PickDateActivity"
             android:theme="@style/BmrTheme.NoActionBar" />

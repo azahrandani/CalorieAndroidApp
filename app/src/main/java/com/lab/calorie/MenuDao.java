@@ -12,10 +12,14 @@ import java.util.List;
 public interface MenuDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Menu menu);
+    long insert(Menu menu);
 
     @Query("SELECT * from menu_table")
     LiveData<List<Menu>> getAllMenu();
+
+    @Query("SELECT * from menu_table " +
+            "WHERE id=:id")
+    LiveData<Menu> getMenuById(int id);
 
     @Query("DELETE from menu_table")
     void deleteAll();
