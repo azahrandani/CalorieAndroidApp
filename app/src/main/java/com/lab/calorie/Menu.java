@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -13,7 +14,8 @@ import java.io.Serializable;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
-@Entity(tableName = "menu_table")
+@Entity(tableName = "menu_table",
+        indices = {@Index(value = "calendar", unique = true)})
 public class Menu implements Serializable {
 
     @NonNull

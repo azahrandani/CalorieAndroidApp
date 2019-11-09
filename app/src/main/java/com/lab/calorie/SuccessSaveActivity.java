@@ -1,8 +1,11 @@
 package com.lab.calorie;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
@@ -63,11 +66,7 @@ public class SuccessSaveActivity extends AppCompatActivity {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
         try {
             Date date = formatter.parse(dateString);
-            System.out.println("CIHUY dateString adalah " + dateString);
             calendar.setTime(date);
-            System.out.println("CIHUY jadinya calendar date adalah " + calendar.get(Calendar.DATE));
-            System.out.println("CIHUY jadinya calendar month adalah " + calendar.get(Calendar.MONTH));
-            System.out.println("CIHUY jadinya calendar year adalah " + calendar.get(Calendar.YEAR));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -82,6 +81,8 @@ public class SuccessSaveActivity extends AppCompatActivity {
 
         addEvent(calendar, createStringMenu(selectedFoodList));
 
+        setNotificationScheduler(calendar, newMenu);
+
         CalorieRoomDatabase database = CalorieRoomDatabase.getDatabase(this);
         MenuDao menuDao = database.menuDao();
         FoodMenuJoinDao foodMenuJoinDao = database.foodMenuJoinDao();
@@ -89,26 +90,6 @@ public class SuccessSaveActivity extends AppCompatActivity {
         new dbTransactionAsyncTask(this, database, menuDao, foodMenuJoinDao, newMenu, selectedFoodList).execute();
 
         menuBinding = DataBindingUtil.setContentView(this, R.layout.activity_success_save);
-
-//        Button printCurrentMenu = findViewById(R.id.button_see_all_menu);
-//        printCurrentMenu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                System.out.println("button diklik");
-//
-//                mMenuViewModel.getAllMenu().observe(SuccessSaveActivity.this, new Observer<List<Menu>>() {
-//                    @Override
-//                    public void onChanged(List<Menu> allMenu) {
-//                        System.out.println("onChanged apa engga sih ini");
-//                        System.out.println("size " + allMenu.size());
-//                        for (Menu menu : allMenu) {
-//                            System.out.println("caloriiiii value: " + menu.getCalorieValue());
-//                            System.out.println("bmrrrr value: " + menu.getBmrValue());
-//                        }
-//                    }
-//                });
-//            }
-//        });
 
         recyclerView = findViewById(R.id.foodMenuRecyclerView);
         adapter = new FoodMenuJoinAdapter(this);
@@ -124,6 +105,15 @@ public class SuccessSaveActivity extends AppCompatActivity {
             }
         });
 
+        Button buttonMakeAnotherMenu = findViewById(R.id.button_make_another_menu);
+        buttonMakeAnotherMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent pickMenuIntent = new Intent(SuccessSaveActivity.this, PickMenuActivity.class);
+                pickMenuIntent.putExtra("bmr_value", (double) bmrValue);
+                startActivity(pickMenuIntent);
+            }
+        });
 
     }
 
@@ -182,6 +172,26 @@ public class SuccessSaveActivity extends AppCompatActivity {
         values.put(CalendarContract.Events.GUESTS_CAN_SEE_GUESTS, "1");
 
         cr.insert(CalendarContract.Events.CONTENT_URI, values);
+    }
+
+    private void setNotificationScheduler(Calendar calendar, Menu menu) {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        Intent notificationIntent = new Intent(this, NotificationPublisher.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("menu", menu);
+        notificationIntent.putExtra("menu", bundle);
+
+        PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DATE, calendar.get(Calendar.DATE));
+        cal.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
+        cal.set(Calendar.YEAR, calendar.get(Calendar.YEAR));
+        cal.set(Calendar.HOUR_OF_DAY, 12);
+        cal.set(Calendar.MINUTE, 0);
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
     }
 
     private static class dbTransactionAsyncTask extends AsyncTask<Void, Void, Void> {

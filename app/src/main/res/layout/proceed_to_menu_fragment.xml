@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/textViewProceed"
-        android:text="Now let's proceed to"
+        android:text="@string/lets_proceed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/bmrGreen"
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:background="@color/bmrGreen"
         android:padding="10dp"
-        android:text="PICK MY \nMENUS"
+        android:text="@string/pick_my_menus"
         android:textSize="20dp"
         android:textColor="#000"
         android:layout_marginTop="20dp"

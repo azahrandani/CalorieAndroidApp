@@ -49,37 +49,18 @@ public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.ListMe
 
     @Override
     public void onBindViewHolder(final ListMenuViewHolder holder, final int position) {
-        int greyColor = holder.mView.getResources().getColor(R.color.bmrGrey);
-        int darkBlueColor = holder.mView.getResources().getColor(R.color.bmrDarkBlue);
-
-        // String listmenuName = listmenuList.get(position).getName();
-        // String listmenuNutrient = Integer.toString(listmenuList.get(position).getKcal());
-
         holder.textViewListMenuDate.setText(menuList.get(position).getCalendarInSlash());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 System.out.println("position yang diklik di list menu adapter adalah " + position);
                  fragmentJump(menuList.get(position));
-//                 notifyDataSetChanged();
              }
          });
-
-//         if (selectedItems[position] == 1) {
-//             holder.listmenuCardView.setCardBackgroundColor(darkBlueColor);
-//         } else {
-//             holder.listmenuCardView.setCardBackgroundColor(greyColor);
-//         }
     }
 
     void setAllMenu(List<Menu> menuList){
         this.menuList = menuList;
-        // this.selectedItems = new int[listmenuList.size()];
-        // for (int i = 0; i < listmenuList.size(); i++) {
-        //     selectedItems[i] = 0;
-        // }
-        System.out.println("size dari listmenuList di setAllFood adalah " + menuList.size());
         notifyDataSetChanged();
     }
 
@@ -95,7 +76,6 @@ public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.ListMe
         DetailMenuFragment fragment = new DetailMenuFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("item_selected_key", mItemSelected);
-//        bundle.putParcelable("item_selected_key", mItemSelected);
         fragment.setArguments(bundle);
         switchContent(R.id.list_detail_menu_fragment, fragment);
     }

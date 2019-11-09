@@ -72,7 +72,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("position yang diklik adalah " + position);
                 selectedItems[position] = selectedItems[position] == 1 ? 0 : 1;
 
                 if (selectedItems[position] == 1) {
@@ -98,7 +97,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         for (int i = 0; i < foodList.size(); i++) {
             selectedItems[i] = 0;
         }
-        System.out.println("size dari foodList di setAllFood adalah " + foodList.size());
         notifyDataSetChanged();
     }
 

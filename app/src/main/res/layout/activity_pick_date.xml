@@ -28,7 +28,7 @@
                 android:id="@+id/textViewYourMenuTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your Menu"
+                android:text="@string/your_menu"
                 android:textSize="32dp"
                 android:gravity="center"
                 android:layout_marginLeft="20dp"
@@ -55,7 +55,7 @@
             android:id="@+id/textViewPickDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pick a Date"
+            android:text="@string/simply_pick_a_date"
             android:textSize="32dp"
             android:gravity="center"
             android:textColor="@color/bmrBlue"
@@ -80,7 +80,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:background="@color/bmrGreen"
-            android:text="SAVE"
+            android:text="@string/save"
             android:textColor="#000"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

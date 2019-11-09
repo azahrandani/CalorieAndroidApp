@@ -43,6 +43,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button seeAllMenuHomeButton = findViewById(R.id.button_see_all_menu_home);
+        seeAllMenuHomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ListMenuActivity.class);
+                startActivity(intent);
+            }
+        });
+
         Button changeLanguageButton = findViewById(R.id.change_language_button);
         changeLanguageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void callFoodApi() {
-        System.out.println("calling food api...");
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<CompleteFoodJson> call = service.getFoodJson();
         call.enqueue(new Callback<CompleteFoodJson>() {
@@ -100,12 +108,11 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<CompleteFoodJson> call, Response<CompleteFoodJson> response) {
                 List<FoodJson> foodJsonList = response.body().getFoodReport().getFoodJsonList();
                 insertAllFood(foodJsonList);
-                System.out.println("finish calling food api!");
             }
 
             @Override
             public void onFailure(Call<CompleteFoodJson> call, Throwable t) {
-                System.out.println("pokonya fail aja " + t.getMessage());
+                t.printStackTrace();
             }
         });
     }

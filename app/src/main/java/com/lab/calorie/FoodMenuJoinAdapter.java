@@ -58,7 +58,6 @@ public class FoodMenuJoinAdapter extends RecyclerView.Adapter<FoodMenuJoinAdapte
 
     void setFood(List<Food> foodList){
         this.foodList = foodList;
-        System.out.println("size dari foodList di setAllFood adalah " + foodList.size());
         notifyDataSetChanged();
     }
 

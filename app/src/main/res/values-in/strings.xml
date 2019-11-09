@@ -17,7 +17,26 @@
     <string name="success_save_title">Menu Tersimpan!</string>
     <string name="for_text_view">untuk</string>
     <string name="button_see_all_menus">Lihat semua menu</string>
-    <string name="button_make_another_menu">Bikin menu lain</string>
+    <string name="button_make_another_menu">Buat menu lain</string>
     <string name="title_activity_list_menu">Daftar Menu</string>
     <string name="title_activity_detail_menu">Menu kamu untuk</string>
+
+    <string name="being_a">Dengan jenis kelamin\u0020</string>
+    <string name="of_age">\u0020berumur\u0020</string>
+    <string name="the_height_of">dengan tinggi\u0020</string>
+    <string name="the_weight_of">dan berat badan\u0020</string>
+
+    <string name="your_bmr_is">BMR kamu adalah</string>
+    <string name="lets_proceed">Ayo lanjut untuk</string>
+    <string name="pick_my_menus">PILIH MENU</string>
+
+    <string name="pick_your_menu">Pilih Menu</string>
+    <string name="total_cal_so_far">Kalori sejauh ini:\u0020</string>
+    <string name="still_need">Kamu masih butuh\u0020</string>
+    <string name="space_calories">\u0020kalori</string>
+    <string name="pick_a_date">PILIH\nTANGGAL</string>
+
+    <string name="your_menu">Menu Terpilih</string>
+    <string name="simply_pick_a_date">Pilih Tanggal</string>
+    <string name="save">SIMPAN</string>
 </resources>

@@ -31,7 +31,6 @@ public class SelectedFoodFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         View view = inflater.inflate(R.layout.selected_food_fragment, container, false);
-        System.out.println("apakah bundle di selected food fragment null? " + bundle.isEmpty());
 
         selectedFood = new ArrayList<>();
 

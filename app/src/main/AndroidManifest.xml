@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
 
     <application
         android:allowBackup="true"
@@ -13,6 +15,9 @@
         android:roundIcon="@drawable/icon_calorie"
         android:supportsRtl="true"
         android:theme="@style/BmrTheme">
+
+        <receiver android:name=".NotificationPublisher"/>
+
         <activity
             android:name=".ListMenuActivity"
             android:label="@string/title_activity_list_menu"
@@ -23,11 +28,6 @@
         <activity
             android:name=".PickDateActivity"
             android:theme="@style/BmrTheme.NoActionBar" />
-
-        <service
-            android:name=".FoodApiService"
-            android:enabled="true"
-            android:exported="true" />
 
         <activity android:name=".MainActivity">
             <intent-filter>

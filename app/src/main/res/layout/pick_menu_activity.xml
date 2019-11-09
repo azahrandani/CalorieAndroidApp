@@ -24,7 +24,7 @@
             android:id="@+id/textViewPickYourMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pick Your Menu"
+            android:text="@string/pick_your_menu"
             android:textSize="32dp"
             android:gravity="center"
             android:layout_marginLeft="10dp"
@@ -71,7 +71,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total calories so far: "
+                    android:text="@string/total_cal_so_far"
                     android:textSize="20dp"/>
 
                 <TextView
@@ -90,7 +90,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="You still need "
+                    android:text="@string/still_need"
                     android:textSize="20dp"/>
 
                 <TextView
@@ -102,7 +102,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" calories"
+                    android:text="@string/space_calories"
                     android:textSize="20dp"/>
 
             </LinearLayout>
@@ -113,7 +113,7 @@
             android:id="@+id/pick_date_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="pick \na date"
+            android:text="@string/pick_a_date"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="30dp"
             android:background="@color/bmrBlue"/>

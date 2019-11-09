@@ -50,8 +50,6 @@ public class PickDateActivity extends AppCompatActivity {
                 int year = month == 0 ? datePicker.getYear()+1 : datePicker.getYear();
 
                 String dateString = date + "/" + month + "/" + year;
-                System.out.println("tanggal " + dateString);
-                System.out.println("bmr value " + bmrValue);
 
                 Intent successSaveIntent = new Intent(PickDateActivity.this, SuccessSaveActivity.class);
                 successSaveIntent.putExtra("food_list", foodListBundle);

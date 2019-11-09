@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface MenuDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(Menu menu);
 
     @Query("SELECT * from menu_table")

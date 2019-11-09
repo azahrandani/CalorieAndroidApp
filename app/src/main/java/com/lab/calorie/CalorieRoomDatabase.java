@@ -59,7 +59,6 @@ public abstract class CalorieRoomDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(final Void... params) {
-            System.out.println("masa sihhchchch");
             return null;
         }
     }

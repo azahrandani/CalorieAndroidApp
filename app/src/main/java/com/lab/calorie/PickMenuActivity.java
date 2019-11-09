@@ -47,7 +47,6 @@ public class PickMenuActivity extends AppCompatActivity {
         mFoodViewModel.getAllFood().observe(this, new Observer<List<Food>>() {
             @Override
             public void onChanged(List<Food> foodList) {
-                System.out.println("masuk ke onchanged di pick menu activity");
                 adapter.setAllFood(foodList);
             }
         });
@@ -60,7 +59,6 @@ public class PickMenuActivity extends AppCompatActivity {
 
                 Bundle bundle = new Bundle();
                 for (int i = 0; i < selectedFood.size(); i++) {
-                    System.out.println(selectedFood.get(i).getName());
                     bundle.putSerializable("food_no_"+i, selectedFood.get(i));
                 }
 
