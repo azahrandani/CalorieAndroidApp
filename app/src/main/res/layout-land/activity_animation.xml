@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.lab.calorie.animation.Stage
+        android:id="@+id/animation_stage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/your_bmi_is"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:gravity="center"
+        android:text="@string/your_bmi_is"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/bmi_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:gravity="center"
+        android:layout_marginTop="300dp"
+        android:textColor="@color/bmrGreen"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="3"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="bottom">
+
+            <TextView
+                android:id="@+id/overweight_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Overweight"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:textColor="#000"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.05"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/normal_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Normal"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:textColor="#000"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/underweight_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Underweight"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:textColor="#000"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</FrameLayout>

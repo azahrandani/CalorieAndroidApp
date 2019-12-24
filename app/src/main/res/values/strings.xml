@@ -39,4 +39,7 @@
     <string name="your_menu">Your Menu</string>
     <string name="simply_pick_a_date">Pick a Date</string>
     <string name="save">SAVE</string>
+
+    <string name="curious"><u>Curious about your BMI?</u></string>
+    <string name="your_bmi_is">Your BMI is\u0020</string>
 </resources>

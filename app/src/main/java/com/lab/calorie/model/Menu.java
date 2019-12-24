@@ -117,14 +117,4 @@ public class Menu implements Serializable {
         return month;
     }
 
-//    @Override
-//    public int describeContents() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public void writeToParcel(Parcel parcel, int i) {
-//        parcel.writeInt(id);
-//        parcel.write
-//    }
 }

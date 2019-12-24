@@ -39,4 +39,7 @@
     <string name="your_menu">Menu Terpilih</string>
     <string name="simply_pick_a_date">Pilih Tanggal</string>
     <string name="save">SIMPAN</string>
+
+    <string name="curious"><u>Penasaran dengan nilai BMI kamu?</u></string>
+    <string name="your_bmi_is">BMI kamu adalah\u0020</string>
 </resources>

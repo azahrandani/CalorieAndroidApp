@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -25,8 +26,8 @@ public class BmrResultActivity extends AppCompatActivity {
         String[] inputs = getIntent().getStringArrayExtra("bmr_input");
         Boolean isMale = inputs[0].equals("Male") ? true : false;
         int age = Integer.parseInt(inputs[1]);
-        int height = Integer.parseInt(inputs[2]);
-        int weight = Integer.parseInt(inputs[3]);
+        final int height = Integer.parseInt(inputs[2]);
+        final int weight = Integer.parseInt(inputs[3]);
 
         final Bmr bmr = new Bmr(isMale, age, height, weight);
         mBmrViewModel.insert(bmr);
@@ -38,6 +39,17 @@ public class BmrResultActivity extends AppCompatActivity {
                 Intent pickMenuIntent = new Intent(BmrResultActivity.this, PickMenuActivity.class);
                 pickMenuIntent.putExtra("bmr_value", bmr.getValue());
                 startActivity(pickMenuIntent);
+            }
+        });
+
+        TextView bmiTextClick = findViewById(R.id.bmi_text_click);
+        bmiTextClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent animationIntent = new Intent(BmrResultActivity.this, AnimationActivity.class);
+                animationIntent.putExtra("height", height);
+                animationIntent.putExtra("weight", weight);
+                startActivity(animationIntent);
             }
         });
     }
