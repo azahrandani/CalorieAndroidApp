@@ -1,11 +1,17 @@
 package com.lab.calorie.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -29,7 +35,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 public class MainActivity extends AppCompatActivity {
 
     private FoodViewModel mFoodViewModel;
@@ -41,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
 
         mFoodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
 
+        initializeButtons();
+        checkInternetConnection();
+    }
+
+    private void initializeButtons() {
         Button calculateButton = findViewById(R.id.calculateButton);
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,8 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        callFoodApi();
     }
 
     private String[] getInputData() {
@@ -130,5 +138,30 @@ public class MainActivity extends AppCompatActivity {
             Food newFood = new Food(food.getName(), food.getfoodNutrientList().get(0).getValue());
             mFoodViewModel.insert(newFood);
         }
+    }
+
+    private void checkInternetConnection() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        if (isConnected) {
+            callFoodApi();
+        } else {
+            showAlertDialog();
+        }
+    }
+
+    private void showAlertDialog() {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("No internet connection");
+        alertDialog.setMessage("This app needs internet connection. Please make sure you're online first.");
+        alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
+        alertDialog.setButton(Dialog.BUTTON_POSITIVE, "Exit app", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        alertDialog.show();
     }
 }
