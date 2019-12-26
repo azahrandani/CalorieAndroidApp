@@ -39,6 +39,7 @@ public class NotificationPublisher extends BroadcastReceiver {
         Intent targetIntent = new Intent(context, ListMenuActivity.class);
         targetIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         targetIntent.putExtra("menu", menuBundle);
+        System.out.println("###id dari menu yg disimpen di NotificationPublisher " + menu.getId());
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, targetIntent, PendingIntent.FLAG_ONE_SHOT);
 
@@ -48,6 +49,7 @@ public class NotificationPublisher extends BroadcastReceiver {
                 .setContentText(generateStringFoodList(selectedFoodList))
                 .setTicker("Food Alert!")
                 .setSmallIcon(R.drawable.icon_calorie)
+                .setAutoCancel(true)
                 .setContentIntent(pendingIntent).build();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

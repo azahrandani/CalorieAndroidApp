@@ -76,7 +76,7 @@ public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.ListMe
         return 0;
     }
 
-    private void fragmentJump(Menu mItemSelected) {
+    public void fragmentJump(Menu mItemSelected) {
         DetailMenuFragment fragment = new DetailMenuFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("item_selected_key", mItemSelected);
@@ -92,7 +92,6 @@ public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.ListMe
             Fragment frag = fragment;
             listMenuActivity.switchContent(id, frag);
         }
-
     }
 
 }

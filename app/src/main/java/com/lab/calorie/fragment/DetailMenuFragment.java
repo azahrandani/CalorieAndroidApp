@@ -18,6 +18,7 @@ import com.lab.calorie.R;
 import com.lab.calorie.adapter.FoodMenuJoinAdapter;
 import com.lab.calorie.databinding.DetailMenuFragmentBinding;
 import com.lab.calorie.model.Food;
+import com.lab.calorie.model.FoodMenuJoin;
 import com.lab.calorie.model.Menu;
 import com.lab.calorie.viewModel.FoodMenuJoinViewModel;
 
@@ -43,7 +44,11 @@ public class DetailMenuFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.detail_menu_fragment, container, false);
         View view = binding.getRoot();
 
-        Menu menu = (Menu) bundle.getSerializable("item_selected_key");
+        final Menu menu = (Menu) bundle.getSerializable("item_selected_key");
+        int menuIdBundle = -1;
+        if (bundle.getSerializable("menu_id") != null) {
+            menuIdBundle = (int) bundle.getSerializable("menu_id");
+        }
 
         binding.setMenu(menu);
 
@@ -54,13 +59,36 @@ public class DetailMenuFragment extends Fragment {
 
         mFoodMenuJoinViewModel = new ViewModelProvider(getActivity()).get(FoodMenuJoinViewModel.class);
 
-        mFoodMenuJoinViewModel.getFoodForMenu(menu.getId()).observe(this, new Observer<List<Food>>() {
+        final int menuId;
+        if (menuIdBundle < 0) {
+            menuId = menu.getId();
+        } else {
+            menuId = menuIdBundle;
+        }
+
+        mFoodMenuJoinViewModel.getFoodForMenu(menuId).observe(this, new Observer<List<Food>>() {
             @Override
             public void onChanged(List<Food> foodList) {
                 adapter.setFood(foodList);
+                System.out.println("###adapter.setFood di DetailMenuFragment");
+                System.out.println("###menu nya adalah untuk tanggal " + menu.getCalendarInNames());
+                System.out.println("###bmr val nya " + menu.getBmrValue());
+                System.out.println("###id dari menu nya adalah " + menuId);
+                System.out.println("###FoodList size " + foodList.size());
             }
         });
 
+        mFoodMenuJoinViewModel.getAllFoodMenuJoin().observe(this, new Observer<List<FoodMenuJoin>>() {
+            @Override
+            public void onChanged(List<FoodMenuJoin> foodMenuJoins) {
+                System.out.println("###FoodMenuJoinList di DetailFragment size " + foodMenuJoins.size());
+                for (FoodMenuJoin foodMenuJoin : foodMenuJoins) {
+                    System.out.println(foodMenuJoin.getFoodId() + " " + foodMenuJoin.getMenuId());
+                }
+            }
+        });
+
+        System.out.println("di onCreateView nya DetailMenuFragment");
         return view;
     }
 

@@ -17,7 +17,6 @@ public class Stage extends GLSurfaceView {
         renderer = new AnimationRenderer();
         renderer.setBmiStatus(bmiStatus);
         setRenderer(renderer);
-//        setRenderMode(RENDERMODE_WHEN_DIRTY);
     }
 
     public void setBmiStatus(String bmiStatus) {

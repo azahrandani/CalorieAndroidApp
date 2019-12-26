@@ -20,6 +20,7 @@ public class FoodMenuJoinViewModel extends AndroidViewModel {
         super(application);
         mRepository = new FoodMenuJoinRepository(application);
         mAllFoodMenuJoin = mRepository.getAllFoodMenuJoin();
+        System.out.println("###construct FoodMenuJoinViewModel");
     }
 
     public LiveData<List<FoodMenuJoin>> getAllFoodMenuJoin() {

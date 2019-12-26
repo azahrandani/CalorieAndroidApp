@@ -21,6 +21,8 @@ public class FoodMenuJoinRepository {
         CalorieRoomDatabase db = CalorieRoomDatabase.getDatabase(application);
         mFoodMenuJoinDao = db.foodMenuJoinDao();
         mAllFoodMenuJoin = mFoodMenuJoinDao.getAllFoodMenuJoin();
+        System.out.println("###construct FoodMenuJoinRepository");
+        System.out.println("###apakah allFoodMenuJoin foodMenuJoinDao null? " + mFoodMenuJoinDao.getAllFoodMenuJoin() == null);
     }
 
     public LiveData<List<FoodMenuJoin>> getAllFoodMenuJoin() {

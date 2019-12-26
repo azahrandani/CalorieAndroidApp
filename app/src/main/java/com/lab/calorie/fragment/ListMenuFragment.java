@@ -1,6 +1,7 @@
 package com.lab.calorie.fragment;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,17 +36,12 @@ public class ListMenuFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        System.out.println("###onCreateView ListMenuFragment");
 
-        // Bundle bundle = this.getArguments();
         View view = inflater.inflate(R.layout.list_menu_fragment, container, false);
 
         mMenuViewModel = new ViewModelProvider(this).get(MenuViewModel.class);
-
         listMenu = new ArrayList<>();
-
-        // for (String key : bundle.keySet()) {
-        //     selectedFood.add((Food) bundle.getSerializable(key));
-        // }
 
         recyclerView = view.findViewById(R.id.listMenuRecyclerView);
         adapter = new ListMenuAdapter(getContext());
@@ -56,8 +52,16 @@ public class ListMenuFragment extends Fragment {
             @Override
             public void onChanged(List<Menu> menuList) {
                 adapter.setAllMenu(menuList);
+                System.out.println("###MenuList size " + menuList.size());
             }
         });
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            SystemClock.sleep(2000);
+            Menu menu = (Menu) bundle.getSerializable("item_selected_key");
+            simulateClick(menu);
+        }
 
         return view;
     }
@@ -65,5 +69,10 @@ public class ListMenuFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    public void simulateClick(Menu menu) {
+        System.out.println("lewat simulateCLick menu");
+        adapter.fragmentJump(menu);
     }
 }

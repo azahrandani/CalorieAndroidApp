@@ -56,6 +56,7 @@ public class SuccessSaveActivity extends AppCompatActivity {
     private String dateString;
     private int bmrValue;
     private int totalCalorie;
+    private static Calendar calendar;
 
     private MenuViewModel mMenuViewModel;
     private FoodMenuJoinViewModel mFoodMenuJoinViewModel;
@@ -73,7 +74,7 @@ public class SuccessSaveActivity extends AppCompatActivity {
         bmrValue = getIntent().getIntExtra("bmr_value", 0);
         totalCalorie = getIntent().getIntExtra("total_calorie", 0);
 
-        final Calendar calendar = Calendar.getInstance();
+        calendar = Calendar.getInstance();
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
         try {
             Date date = formatter.parse(dateString);
@@ -92,7 +93,7 @@ public class SuccessSaveActivity extends AppCompatActivity {
 
         addEvent(calendar, createStringMenu(selectedFoodList));
 
-        setNotificationScheduler(calendar, newMenu);
+//        setNotificationScheduler(calendar, newMenu);
 
         CalorieRoomDatabase database = CalorieRoomDatabase.getDatabase(this);
         MenuDao menuDao = database.menuDao();
@@ -185,12 +186,14 @@ public class SuccessSaveActivity extends AppCompatActivity {
         cr.insert(CalendarContract.Events.CONTENT_URI, values);
     }
 
-    private void setNotificationScheduler(Calendar calendar, Menu menu) {
+    private void setNotificationScheduler(Calendar calendar, Menu menu, int menuId) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         Intent notificationIntent = new Intent(this, NotificationPublisher.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("menu", menu);
+        bundle.putSerializable("menu_id", menuId);
+        System.out.println("###id dari menu yg dipass sama NotificationScheduler " + menuId);
         notificationIntent.putExtra("menu", bundle);
         notificationIntent.putExtra("food_list", foodListBundle);
 
@@ -200,8 +203,8 @@ public class SuccessSaveActivity extends AppCompatActivity {
         cal.set(Calendar.DATE, calendar.get(Calendar.DATE));
         cal.set(Calendar.MONTH, calendar.get(Calendar.MONTH));
         cal.set(Calendar.YEAR, calendar.get(Calendar.YEAR));
-        cal.set(Calendar.HOUR_OF_DAY, 12);
-        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 21);
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
     }
@@ -257,6 +260,7 @@ public class SuccessSaveActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
             activity.updateRecylerView(newMenuId);
             activity.updateMenuBinding(newMenuId);
+            activity.setNotificationScheduler(calendar, newMenu, newMenuId);
         }
     }
 
