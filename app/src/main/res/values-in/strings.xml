@@ -67,4 +67,6 @@
     <string name="this_app_needs">Aplikasi ini membutuhkan koneksi internet. Pastikan terlebih dahulu bahwa anda terhubung.</string>
     <string name="exit_app">Keluar aplikasi</string>
 
+    <string name="back">Kembali</string>
+
 </resources>

@@ -43,17 +43,19 @@ public class AnimationRenderer implements GLSurfaceView.Renderer {
     @Override
     public void onDrawFrame(GL10 gl) {
 
-        if (counter == 0) {
+        if (counter < 40) {
             bottomSquareOn();
+            System.out.println("###counter < 40");
             counter++;
         } else {
-            if (counter == 1) {
+            if (counter < 80) {
                 middleSquareOn();
+                System.out.println("###counter == 40");
                 counter++;
-            } else if (counter == 2) {
+            } else if (counter < 120) {
                 topSquareOn();
                 counter++;
-            } else if (counter == 3) {
+            } else if (counter < 160) {
                 if (bmiStatus.equals("underweight")) {
                     bottomSquareOn();
                 }
@@ -61,17 +63,16 @@ public class AnimationRenderer implements GLSurfaceView.Renderer {
                     bottomSquareOn();
                     counter++;
                 }
-            } else if (counter == 4) {
+            } else if (counter < 200) {
                 if (bmiStatus.equals("normal")) {
                     middleSquareOn();
                 } else {
                     middleSquareOn();
                     counter++;
                 }
-            } else {
+            } else if (counter >= 200) {
                 topSquareOn();
             }
-            SystemClock.sleep(700);
         }
 
         System.out.println("finish onDraw rendering");

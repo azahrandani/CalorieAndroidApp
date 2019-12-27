@@ -81,4 +81,14 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:background="@color/bmrGreen"
+        android:textColor="#000"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="50dp"/>
+
 </FrameLayout>

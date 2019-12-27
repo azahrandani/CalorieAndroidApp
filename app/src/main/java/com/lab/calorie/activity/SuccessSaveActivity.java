@@ -205,6 +205,7 @@ public class SuccessSaveActivity extends AppCompatActivity {
         cal.set(Calendar.YEAR, calendar.get(Calendar.YEAR));
         cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.MINUTE, 21);
+        //TODO: CHANGE THE HOUR AND MINUTE ZAHRAA System.out.println
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
     }
