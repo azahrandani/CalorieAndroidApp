@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.MainActivity">
+        tools:context=".activity.CalculatorActivity">
 
         <ImageView
             android:layout_width="match_parent"
@@ -16,203 +16,84 @@
             android:scaleType="centerCrop"
             android:src="@drawable/background_spork_mobile_portrait" />
 
-        <Button
-            android:id="@+id/button_to_timer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <TextView
-            android:id="@+id/titleBMRCalculator"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/bmr_calculator"
-            android:textColor="@color/bmrBlue"
-            android:textSize="32dp"
-            android:textStyle="bold"
-            android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="45dp"/>
+            android:orientation="vertical"
+            android:layout_marginTop="50dp">
 
-        <LinearLayout
-            android:id="@+id/gender_radio_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="17dp"
-            android:gravity="center_vertical"
-            app:layout_constraintStart_toStartOf="@+id/age_linear_layout"
-            app:layout_constraintTop_toBottomOf="@id/titleBMRCalculator">
-
-            <TextView
-                android:layout_width="100dp"
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:text="@string/form_gender"
-                android:textColor="@color/bmrGreen"
-                android:textSize="20dp"
-                tools:layout_editor_absoluteX="70dp"
-                tools:layout_editor_absoluteY="193dp" />
+                android:src="@drawable/icon_calculator"
+                android:layout_gravity="center"/>
 
-            <RadioGroup
-                android:id="@+id/radioGroup"
-                android:layout_width="145dp"
+            <Button
+                android:id="@+id/button_to_calculator"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="155dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:layout_editor_absoluteX="183dp"
-                tools:layout_editor_absoluteY="172dp">
+                android:layout_marginTop="10dp"
+                android:background="@color/bmrGreen"
+                android:textColor="#000"
+                android:layout_gravity="center"
+                android:text="@string/bmr_calculator"/>
 
-                <RadioButton
-                    android:id="@+id/radioMale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/form_male"
-                    android:textColor="@color/bmrGreen" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_timer"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center"/>
 
-                <RadioButton
-                    android:id="@+id/radioFemale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/form_female"
-                    android:textColor="@color/bmrGreen"
-                    tools:layout_editor_absoluteX="103dp"
-                    tools:layout_editor_absoluteY="25dp" />
-            </RadioGroup>
+            <Button
+                android:id="@+id/button_to_timer"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+                android:background="@color/bmrGreen"
+                android:textColor="#000"
+                android:layout_marginTop="10dp"
+                android:text="@string/exercise_timer"
+                android:layout_gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/weight_linear_layout"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_menu"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/button_to_menu"
+                android:layout_width="155dp"
+                android:layout_height="wrap_content"
+                android:background="@color/bmrGreen"
+                android:textColor="#000"
+                android:text="@string/button_see_all_menus"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/calculateButton"/>
+
+            <Button
+                android:id="@+id/change_language_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/button_see_all_menu_home"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/change_language"/>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/age_linear_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="12dp"
-            android:gravity="center_vertical"
-            app:layout_constraintStart_toStartOf="@+id/height_linear_layout"
-            app:layout_constraintTop_toTopOf="@+id/gender_radio_group">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:text="@string/form_age"
-                android:textColor="@color/bmrGreen"
-                android:textSize="20dp"
-                tools:layout_editor_absoluteX="70dp"
-                tools:layout_editor_absoluteY="193dp" />
-
-            <EditText
-                android:id="@+id/age_input"
-                android:layout_width="145dp"
-                android:layout_height="53dp"
-                android:hint="@string/years_old"
-                android:inputType="number"
-                android:textColor="@color/bmrGreen"
-                tools:layout_editor_absoluteX="186dp"
-                tools:layout_editor_absoluteY="185dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/height_linear_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:layout_marginBottom="17dp"
-            android:gravity="center_vertical"
-            app:layout_constraintStart_toStartOf="@+id/weight_linear_layout"
-            app:layout_constraintTop_toTopOf="@+id/age_linear_layout">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:text="@string/form_height"
-                android:textColor="@color/bmrGreen"
-                android:textSize="20dp"
-                tools:layout_editor_absoluteX="70dp"
-                tools:layout_editor_absoluteY="193dp" />
-
-            <EditText
-                android:id="@+id/height_input"
-                android:layout_width="145dp"
-                android:layout_height="53dp"
-                android:hint="@string/cm"
-                android:inputType="number"
-                android:textColor="@color/bmrGreen"
-                tools:layout_editor_absoluteX="186dp"
-                tools:layout_editor_absoluteY="185dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/weight_linear_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:layout_marginBottom="74dp"
-            android:gravity="center_vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/height_linear_layout">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:text="@string/form_weight"
-                android:textColor="@color/bmrGreen"
-                android:textSize="20dp"
-                tools:layout_editor_absoluteX="70dp"
-                tools:layout_editor_absoluteY="193dp" />
-
-            <EditText
-                android:id="@+id/weight_input"
-                android:layout_width="145dp"
-                android:layout_height="53dp"
-                android:hint="@string/kg"
-                android:inputType="number"
-                android:textColor="@color/bmrGreen"
-                tools:layout_editor_absoluteX="186dp"
-                tools:layout_editor_absoluteY="185dp" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/calculateButton"
-            android:layout_width="155dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="100dp"
-            android:background="@color/bmrGreen"
-            android:text="@string/calculate"
-            android:textColor="#000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/weight_linear_layout"/>
-
-        <Button
-            android:id="@+id/button_see_all_menu_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_see_all_menus"
-            android:background="@color/bmrBlue"
-            android:padding="10dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/calculateButton"/>
-
-        <Button
-            android:id="@+id/change_language_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/button_see_all_menu_home"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/change_language"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

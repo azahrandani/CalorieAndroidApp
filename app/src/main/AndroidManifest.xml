@@ -19,10 +19,19 @@
         android:roundIcon="@drawable/icon_calorie"
         android:supportsRtl="true"
         android:theme="@style/BmrTheme">
+        <activity
+            android:name=".activity.MainActivity"
+            android:label="@string/title_activity_main">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <service
             android:name=".service.TimerService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
             android:name=".activity.TimerActivity"
@@ -45,13 +54,10 @@
         <activity
             android:name=".activity.AnimationActivity"
             android:theme="@style/BmrTheme.NoActionBar" />
-        <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity
+            android:name=".activity.CalculatorActivity"
+            android:theme="@style/BmrTheme.NoActionBar" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".activity.BmrResultActivity" />
         <activity android:name=".activity.PickMenuActivity" />
     </application>

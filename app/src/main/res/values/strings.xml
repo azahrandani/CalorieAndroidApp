@@ -59,5 +59,8 @@
     <string name="congrats">Calorie: Good job!</string>
     <string name="youve_burned">You\'ve burned</string>
     <string name="by_doing">by doing</string>
+    <string name="title_activity_main">Calorie</string>
+
+    <string name="exercise_timer">Exercise timer</string>
 
 </resources>

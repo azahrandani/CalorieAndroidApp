@@ -59,5 +59,8 @@
     <string name="congrats">Calorie: Hebat!</string>
     <string name="youve_burned">Kamu telah membakar</string>
     <string name="by_doing">dengan melakukan</string>
+    <string name="title_activity_main">Calorie</string>
+
+    <string name="exercise_timer">Timer olahraga</string>
 
 </resources>
