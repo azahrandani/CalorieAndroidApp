@@ -63,4 +63,8 @@
 
     <string name="exercise_timer">Exercise timer</string>
 
+    <string name="no_internet">No internet connection</string>
+    <string name="this_app_needs">This app needs internet connection. Please make sure you\'re online first.</string>
+    <string name="exit_app">Exit app</string>
+
 </resources>

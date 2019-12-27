@@ -37,7 +37,7 @@ public class MenuNotificationPublisher extends BroadcastReceiver {
         }
 
         Intent targetIntent = new Intent(context, ListMenuActivity.class);
-        targetIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        targetIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         targetIntent.putExtra("menu", menuBundle);
         System.out.println("###id dari menu yg disimpen di MenuNotificationPublisher " + menu.getId());
 

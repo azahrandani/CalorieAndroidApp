@@ -1,10 +1,12 @@
 package com.lab.calorie.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lab.calorie.R;
+import com.lab.calorie.activity.MainActivity;
 import com.lab.calorie.adapter.ListMenuAdapter;
 import com.lab.calorie.model.Menu;
 import com.lab.calorie.viewModel.MenuViewModel;
@@ -62,6 +65,15 @@ public class ListMenuFragment extends Fragment {
             Menu menu = (Menu) bundle.getSerializable("item_selected_key");
             simulateClick(menu);
         }
+
+        ImageView homeButton = view.findViewById(R.id.home_button);
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toHomeIntent = new Intent(getContext(), MainActivity.class);
+                startActivity(toHomeIntent);
+            }
+        });
 
         return view;
     }

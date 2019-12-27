@@ -26,7 +26,7 @@ import java.util.Locale;
 public class TimerActivity extends AppCompatActivity {
 
     private String exercise;
-    private int minutes = 1;
+    private int minutes;
     private String calories;
     private Boolean inputDisabled;
     private long timerEndTime;
@@ -50,19 +50,7 @@ public class TimerActivity extends AppCompatActivity {
             Boolean isFinish = intent.getBooleanExtra("finish", false);
             updateTheTimer(intent);
             if (isFinish) {
-                System.out.println("masuk ke isFinish");
-                stopButton.setVisibility(View.INVISIBLE);
-                startButton.setBackgroundColor(getResources().getColor(R.color.bmrGreen));
-                startButton.setEnabled(true);
-                for (int i = 0; i < radioGroup.getChildCount(); i++) {
-                    RadioButton radioButton = (RadioButton) radioGroup.getChildAt(i);
-                    radioButton.setEnabled(true);
-                    radioButton.setTextColor(getResources().getColor(R.color.bmrGreen));
-                }
-
-                numberPicker.setValue(1);
-                numberPicker.setEnabled(true);
-                inputDisabled = false;
+                enableInput();
             }
         }
     };
@@ -72,17 +60,48 @@ public class TimerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
 
+        minutes = 1;
         inputDisabled = false;
+        initializeViewComponents();
+        updateChosenExercise();
+        calculateBurnCalories();
+
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(timerBroadcastReceiver, new IntentFilter(TimerService.COUNTDOWN_SERVICE));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(timerBroadcastReceiver);
+    }
+
+    NumberPicker.OnValueChangeListener onValueChangeListener =
+            new NumberPicker.OnValueChangeListener() {
+                @Override
+                public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                    minutes = numberPicker.getValue();
+                    calculateBurnCalories();
+                }
+            };
+
+    private void initializeViewComponents() {
+        scrollView = findViewById(R.id.timer_scrollview);
 
         numberPicker = findViewById(R.id.minutes_number_picker);
         numberPicker.setMinValue(1);
         numberPicker.setMaxValue(20);
         numberPicker.setOnValueChangedListener(onValueChangeListener);
 
-        scrollView = findViewById(R.id.timer_scrollview);
-        countdownText = findViewById(R.id.countdown_timer);
+        startButton = findViewById(R.id.start_button);
         stopButton = findViewById(R.id.stop_button);
         burnValue = findViewById(R.id.value_burn);
+        countdownText = findViewById(R.id.countdown_timer);
 
         radioGroup = findViewById(R.id.exercise_radio_group);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -93,77 +112,88 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
         radioGroup.check(R.id.radio_jumping);
-        updateChosenExercise();
-        calculateBurnCalories();
 
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        initializeButtonsListener();
+    }
 
-        startButton = findViewById(R.id.start_button);
+    private void initializeButtonsListener() {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateChosenExercise();
-                startTimerService();
-                stopButton.setVisibility(View.VISIBLE);
-                startButton.setBackgroundColor(getResources().getColor(R.color.bmrGrey));
-                startButton.setEnabled(false);
-                scrollView.smoothScrollTo(0, 260);
-                registerNotification();
+                onClickStartButton();
             }
         });
 
-        stopButton = findViewById(R.id.stop_button);
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TimerActivity.this, TimerService.class);
-                stopService(intent);
-                countdownText.setText("00:00");
-                stopButton.setVisibility(View.GONE);
-                startButton.setBackgroundColor(getResources().getColor(R.color.bmrGreen));
-                startButton.setEnabled(true);
-                for (int i = 0; i < radioGroup.getChildCount(); i++) {
-                    RadioButton radioButton = (RadioButton) radioGroup.getChildAt(i);
-                    radioButton.setEnabled(true);
-                    radioButton.setTextColor(getResources().getColor(R.color.bmrGreen));
-                }
-
-                numberPicker.setValue(1);
-                numberPicker.setEnabled(true);
-                inputDisabled = false;
-                cancelNotification();
+                onClickStopButton();
             }
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        registerReceiver(timerBroadcastReceiver, new IntentFilter(TimerService.COUNTDOWN_SERVICE));
-        System.out.println("###Registered broadcast receiver");
+    private void onClickStartButton() {
+        startTimerService();
+        disableInput();
+        registerNotification();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        unregisterReceiver(timerBroadcastReceiver);
-        System.out.println("###Unregistered broadcast receiver");
+    private void onClickStopButton() {
+        Intent intent = new Intent(TimerActivity.this, TimerService.class);
+        stopService(intent);
+        enableInput();
+        cancelNotification();
     }
 
-    NumberPicker.OnValueChangeListener onValueChangeListener =
-            new NumberPicker.OnValueChangeListener() {
-                @Override
-                public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                    minutes = numberPicker.getValue();
-                    System.out.println(minutes + " minutes");
-                    calculateBurnCalories();
-                }
-            };
+    private void enableInput() {
+        countdownText.setText("00:00");
+
+        stopButton.setVisibility(View.GONE);
+        startButton.setBackgroundColor(getResources().getColor(R.color.bmrGreen));
+        startButton.setEnabled(true);
+
+        for (int i = 0; i < radioGroup.getChildCount(); i++) {
+            RadioButton radioButton = (RadioButton) radioGroup.getChildAt(i);
+            radioButton.setEnabled(true);
+            radioButton.setTextColor(getResources().getColor(R.color.bmrGreen));
+        }
+
+        numberPicker.setValue(1);
+        numberPicker.setEnabled(true);
+
+        inputDisabled = false;
+    }
+
+    private void disableInput() {
+        scrollView.scrollTo(0, 260);
+
+        stopButton.setVisibility(View.VISIBLE);
+        startButton.setBackgroundColor(getResources().getColor(R.color.bmrGrey));
+        startButton.setEnabled(false);
+
+        if (exercise.equals("Jump rope") || exercise.equals("Lompat tali")) {
+            radioGroup.check(R.id.radio_jumping);
+        } else if (exercise.equals("Running") || exercise.equals("Lari")) {
+            radioGroup.check(R.id.radio_running);
+        } else {
+            radioGroup.check(R.id.radio_cycling);
+        }
+
+        for (int i = 0; i < radioGroup.getChildCount(); i++) {
+            RadioButton radioButton = (RadioButton) radioGroup.getChildAt(i);
+            radioButton.setEnabled(false);
+            radioButton.setTextColor(getResources().getColor(R.color.bmrGrey));
+        }
+
+        numberPicker.setValue(this.minutes);
+        numberPicker.setEnabled(false);
+
+        inputDisabled = true;
+    }
 
     private void updateChosenExercise() {
         RadioButton exerciseInput = findViewById(radioGroup.getCheckedRadioButtonId());
         if (exerciseInput != null) exercise = exerciseInput.getText().toString();
-        System.out.println("exercise chosen: " + exercise);
     }
 
     private void calculateBurnCalories() {
@@ -187,47 +217,20 @@ public class TimerActivity extends AppCompatActivity {
         startIntent.putExtra("seconds", minutes * 60);
         startIntent.putExtra("exercise", exercise);
         startService(startIntent);
-        System.out.println("###Started service from TimerActivity.");
     }
 
     private void updateTheTimer(Intent intent) {
-        System.out.println("###Current scrollView Y offset " + scrollView.getScrollY());
         if (intent.getExtras() != null) {
             long millisUntilFinished = intent.getLongExtra("countdown", 0);
-            System.out.println("###From TimerActivity, countdown seconds remaining: " + millisUntilFinished / 1000);
             int minutes = (int) (millisUntilFinished / 1000) / 60;
             int seconds = (int) (millisUntilFinished / 1000) % 60;
 
             String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
             countdownText.setText(timeLeftFormatted);
-            stopButton.setVisibility(View.VISIBLE);
-            startButton.setBackgroundColor(getResources().getColor(R.color.bmrGrey));
-            startButton.setEnabled(false);
 
             if (!inputDisabled) {
-                scrollView.scrollTo(0, 260);
-
-                if (exercise.equals("Jump rope") || exercise.equals("Lompat tali")) {
-                    radioGroup.check(R.id.radio_jumping);
-                } else if (exercise.equals("Running") || exercise.equals("Lari")) {
-                    radioGroup.check(R.id.radio_running);
-                } else {
-                    radioGroup.check(R.id.radio_cycling);
-                }
-
-                for (int i = 0; i < radioGroup.getChildCount(); i++) {
-                    RadioButton radioButton = (RadioButton) radioGroup.getChildAt(i);
-                    radioButton.setEnabled(false);
-                    radioButton.setTextColor(getResources().getColor(R.color.bmrGrey));
-                }
-
-                numberPicker.setValue(this.minutes);
-                System.out.println("###minutes yg diset adalah " + this.minutes);
-                numberPicker.setEnabled(false);
-
-                inputDisabled = true;
+                disableInput();
             }
-
         }
     }
 
@@ -247,7 +250,6 @@ public class TimerActivity extends AppCompatActivity {
         Intent notificationIntent = new Intent(this, StopwatchNotificationPublisher.class);
         PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.cancel(broadcast);
-        System.out.println("###Cancelled notification");
     }
 
 }

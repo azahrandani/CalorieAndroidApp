@@ -63,4 +63,8 @@
 
     <string name="exercise_timer">Timer olahraga</string>
 
+    <string name="no_internet">Tidak ada koneksi internet</string>
+    <string name="this_app_needs">Aplikasi ini membutuhkan koneksi internet. Pastikan terlebih dahulu bahwa anda terhubung.</string>
+    <string name="exit_app">Keluar aplikasi</string>
+
 </resources>
