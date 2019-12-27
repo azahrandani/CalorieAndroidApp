@@ -16,6 +16,13 @@
             android:scaleType="centerCrop"
             android:src="@drawable/background_spork_mobile_portrait" />
 
+        <Button
+            android:id="@+id/button_to_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
         <TextView
             android:id="@+id/titleBMRCalculator"
             android:layout_width="match_parent"

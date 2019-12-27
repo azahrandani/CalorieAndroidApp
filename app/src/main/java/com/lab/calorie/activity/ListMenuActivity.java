@@ -6,13 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.lab.calorie.R;
 import com.lab.calorie.fragment.DetailMenuFragment;
 import com.lab.calorie.fragment.ListMenuFragment;
 import com.lab.calorie.model.Menu;
-import com.lab.calorie.viewModel.FoodMenuJoinViewModel;
 
 public class ListMenuActivity extends AppCompatActivity {
 

@@ -7,47 +7,44 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Build;
-import android.os.Bundle;
 
 import com.lab.calorie.R;
-import com.lab.calorie.activity.ListMenuActivity;
-import com.lab.calorie.model.Food;
-import com.lab.calorie.model.Menu;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.lab.calorie.activity.TimerActivity;
 
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 
-public class NotificationPublisher extends BroadcastReceiver {
+public class StopwatchNotificationPublisher extends BroadcastReceiver {
 
     private static final String CHANNEL_ID = "com.lab.calorie.notificationCalorie.channelId";
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Bundle menuBundle = intent.getBundleExtra("menu");
-        Menu menu = (Menu) menuBundle.getSerializable("menu");
+        System.out.println("###Received by stopwatch");
+        String exercise = intent.getStringExtra("exercise").toLowerCase();
+        int minutes = intent.getIntExtra("minutes", 0);
+        String calories = intent.getStringExtra("calories");
 
-        Bundle foodListBundle = intent.getBundleExtra("food_list");
-        List<Food> selectedFoodList = new ArrayList<>();
-
-        for (String key : foodListBundle.keySet()) {
-            selectedFoodList.add((Food) foodListBundle.getSerializable(key));
-        }
-
-        Intent targetIntent = new Intent(context, ListMenuActivity.class);
+        Intent targetIntent = new Intent(context, TimerActivity.class);
         targetIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        targetIntent.putExtra("menu", menuBundle);
-        System.out.println("###id dari menu yg disimpen di NotificationPublisher " + menu.getId());
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, targetIntent, PendingIntent.FLAG_ONE_SHOT);
 
         Notification.Builder builder = new Notification.Builder(context);
 
-        Notification notification = builder.setContentTitle("Calorie: Your food for today")
-                .setContentText(generateStringFoodList(selectedFoodList))
-                .setTicker("Food Alert!")
+        Resources resources = context.getResources();
+
+        String notificationTitle = resources.getString(R.string.congrats);
+        String notificationText = resources.getString(R.string.youve_burned) +
+                                    " " + calories + resources.getString(R.string.calories) +
+                                    " " + resources.getString(R.string.by_doing) + " " + exercise +
+                                    " " + resources.getString(R.string.for_minutes) +
+                                    " " + minutes + " " + resources.getString(R.string.minutes);
+
+        Notification notification = builder.setContentTitle(notificationTitle)
+                .setContentText(notificationText)
+                .setTicker("Exercise Alert!")
                 .setSmallIcon(R.drawable.icon_calorie)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent).build();
@@ -68,13 +65,5 @@ public class NotificationPublisher extends BroadcastReceiver {
         }
 
         notificationManager.notify(0, notification);
-    }
-
-    private String generateStringFoodList(List<Food> selectedFoodList) {
-        String result = "";
-        for (Food food : selectedFoodList) {
-            result += food.getName() + "\n";
-        }
-        return result;
     }
 }

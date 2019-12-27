@@ -23,7 +23,7 @@ import android.provider.CalendarContract;
 import android.view.View;
 import android.widget.Button;
 
-import com.lab.calorie.broadcastReceiver.NotificationPublisher;
+import com.lab.calorie.broadcastReceiver.MenuNotificationPublisher;
 import com.lab.calorie.R;
 import com.lab.calorie.adapter.FoodMenuJoinAdapter;
 import com.lab.calorie.databinding.ActivitySuccessSaveBinding;
@@ -189,7 +189,7 @@ public class SuccessSaveActivity extends AppCompatActivity {
     private void setNotificationScheduler(Calendar calendar, Menu menu, int menuId) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-        Intent notificationIntent = new Intent(this, NotificationPublisher.class);
+        Intent notificationIntent = new Intent(this, MenuNotificationPublisher.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("menu", menu);
         bundle.putSerializable("menu_id", menuId);

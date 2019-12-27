@@ -21,11 +21,13 @@
     <string name="title_activity_list_menu">List of Menus</string>
     <string name="title_activity_detail_menu">Your menu for</string>
 
+    <string name="your_food_today">Calorie: Your food for today</string>
+
     <string name="being_a">Being a\u0020</string>
     <string name="of_age">\u0020of age\u0020</string>
     <string name="the_height_of">the height of\u0020</string>
     <string name="the_weight_of">and the weight of\u0020</string>
-    
+
     <string name="your_bmr_is">Your BMR is</string>
     <string name="lets_proceed">Now let\'s proceed to</string>
     <string name="pick_my_menus">PICK MY \nMENUS</string>
@@ -42,4 +44,20 @@
 
     <string name="curious"><u>Curious about your BMI?</u></string>
     <string name="your_bmi_is">Your BMI is\u0020</string>
+
+    <string name="title_pick_exercise">Pick Your Exercise</string>
+    <string name="jump_rope">Jump rope</string>
+    <string name="running">Running</string>
+    <string name="cycling">Cycling</string>
+    <string name="for_minutes">for</string>
+    <string name="minutes">minutes</string>
+    <string name="youll_burn">You\'ll burn\u0020</string>
+    <string name="calories">\u0020calories</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+
+    <string name="congrats">Calorie: Good job!</string>
+    <string name="youve_burned">You\'ve burned</string>
+    <string name="by_doing">by doing</string>
+
 </resources>

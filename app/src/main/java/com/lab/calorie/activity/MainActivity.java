@@ -82,6 +82,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Button toTimerButton = findViewById(R.id.button_to_timer);
+        toTimerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, TimerActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private String[] getInputData() {

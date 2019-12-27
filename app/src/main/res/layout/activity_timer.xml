@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/timer_scrollview">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activity.TimerActivity">
+
+        <ImageView
+            android:id="@+id/first_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background_spork_mobile_portrait" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background_spork_mobile_portrait_cropped"
+            app:layout_constraintTop_toBottomOf="@+id/first_background"/>
+
+        <TextView
+            android:id="@+id/title_pick_exercise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_pick_exercise"
+            android:textColor="@color/bmrBlue"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="55dp"/>
+
+        <LinearLayout
+            android:id="@+id/exercise_options"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/title_pick_exercise">
+
+            <RadioGroup
+                android:id="@+id/exercise_radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <RadioButton
+                    android:id="@+id/radio_jumping"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/jump_rope"
+                    android:textColor="@color/bmrGreen" />
+
+                <RadioButton
+                    android:id="@+id/radio_running"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/running"
+                    android:textColor="@color/bmrGreen"/>
+
+                <RadioButton
+                    android:id="@+id/radio_cycling"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cycling"
+                    android:textColor="@color/bmrGreen"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/for_minutes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/for_minutes"
+            android:textColor="@color/bmrBlue"
+            android:textSize="32dp"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="@id/exercise_options"
+            android:layout_marginTop="60dp"/>
+
+        <NumberPicker
+            android:id="@+id/minutes_number_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/for_minutes" />
+
+        <TextView
+            android:id="@+id/minutes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/minutes"
+            android:textColor="@color/bmrBlue"
+            android:textSize="32dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/minutes_number_picker"
+            android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+            android:id="@+id/burn_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/minutes"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/youll_burn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/youll_burn"
+                android:textColor="@color/bmrYellow"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/value_burn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/bmrYellow"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/calories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/calories"
+                android:textColor="@color/bmrYellow"
+                android:textSize="16dp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/start_button"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/bmrGreen"
+            android:text="@string/start"
+            android:textColor="#000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/burn_linear"/>
+
+        <TextView
+            android:id="@+id/countdown_timer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textStyle="bold"
+            android:textSize="60dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/start_button"
+            android:layout_marginTop="20dp"/>
+
+        <Button
+            android:id="@+id/stop_button"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/bmrBlue"
+            android:text="@string/stop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/countdown_timer"
+            android:visibility="invisible"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
